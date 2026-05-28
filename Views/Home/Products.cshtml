@@ -1,0 +1,33 @@
+@model List<Mahe.Models.Product>
+
+@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<h1>Products</h1>
+
+<div class="products">
+
+    @foreach (var item in Model)
+    {
+        <div class="card">
+
+            <a href="/Home/Details/@item.Id">
+
+                <img src="@item.ImageUrl" />
+
+                <h3>@item.Name</h3>
+
+            </a>
+
+            <p>Rs. @item.Price</p>
+
+            <a class="btn"
+               href="/Home/Details/@item.Id">
+                View Product
+            </a>
+
+        </div>
+    }
+
+</div>

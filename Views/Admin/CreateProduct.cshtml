@@ -1,0 +1,40 @@
+@model Mahe.Models.Product
+
+@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <h1>Add Product</h1>
+
+    <form method="post"
+          action="/Admin/CreateProduct">
+
+        <input asp-for="Name"
+               placeholder="Product Name" />
+
+        <input asp-for="Price"
+               placeholder="Price" />
+
+        <input asp-for="ImageUrl"
+               placeholder="Image URL" />
+
+        <input asp-for="Stock"
+               placeholder="Stock Quantity" />
+        <input asp-for="SizeChart"
+               placeholder="Size Chart" />
+
+        <textarea asp-for="Description"
+                  placeholder="Description"></textarea>
+
+        <button type="submit"
+                class="pay-btn">
+
+            Add Product
+
+        </button>
+
+    </form>
+
+</div>

@@ -1,0 +1,63 @@
+@model List<Mahe.Models.Product>
+
+@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="admin-products-header">
+
+        <h1>Manage Products</h1>
+
+        <a href="/Admin/CreateProduct"
+           class="add-product-btn">
+
+            Add New Product
+
+        </a>
+
+    </div>
+
+    <div class="admin-products-grid">
+
+        @foreach (var product in Model)
+        {
+            <div class="admin-product-card">
+
+                <img src="@product.ImageUrl" />
+
+                <h2>@product.Name</h2>
+
+                <p>
+                    Rs. @product.Price
+                </p>
+
+                <p>
+                    Stock: @product.Stock
+                </p>
+
+                <div class="admin-product-actions">
+
+                    <a href="/Admin/EditProduct/@product.Id"
+                       class="edit-btn">
+
+                        Edit
+
+                    </a>
+
+                    <a href="/Admin/DeleteProduct/@product.Id"
+                       class="delete-btn">
+
+                        Delete
+
+                    </a>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>

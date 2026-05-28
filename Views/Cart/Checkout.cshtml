@@ -1,0 +1,335 @@
+@model List<Mahe.Models.CartItem>
+
+@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<div class="checkout-page">
+
+    <div class="checkout-left">
+
+        <h1>Checkout</h1>
+
+        <form id="checkoutForm"
+              method="post"
+              action="/Order/PlaceOrder">
+
+            <h2>Contact</h2>
+
+            <input type="email"
+                   placeholder="Email"
+                   required />
+
+            <h2>Delivery</h2>
+
+            <input type="text"
+                   id="firstName"
+                   placeholder="First Name"
+                   oninput="validateTextField(this, 'firstNameError')"
+                   required />
+
+            <small id="firstNameError"
+                   class="field-error"></small>
+
+            <input type="text"
+                   id="lastName"
+                   placeholder="Last Name"
+                   oninput="validateTextField(this, 'lastNameError')"
+                   required />
+
+            <small id="lastNameError"
+                   class="field-error"></small>
+
+            <input type="text"
+                   placeholder="Address"
+                   required />
+
+            <input type="text"
+                   id="city"
+                   placeholder="City"
+                   oninput="validateTextField(this, 'cityError')"
+                   required />
+
+            <small id="cityError"
+                   class="field-error"></small>
+
+            <input type="text"
+                   id="phone"
+                   maxlength="15"
+                   placeholder="+92 327 5259871"
+                   value="+92 "
+                   oninput="validatePhone(this)"
+                   required />
+
+            <small id="phoneError"
+                   class="field-error"></small>
+
+            <h2>Payment</h2>
+
+            <div class="payment-card">
+
+                <input type="radio"
+                       checked />
+
+                <span>Debit / Credit Card</span>
+
+            </div>
+
+            <input type="text"
+                   id="cardNumber"
+                   maxlength="19"
+                   placeholder="1234 5678 9012 3456"
+                   oninput="formatCardNumber(this)"
+                   required />
+
+            <input type="text"
+                   id="cardHolder"
+                   placeholder="Card Holder Name"
+                   oninput="validateTextField(this, 'cardHolderError')"
+                   required />
+
+            <small id="cardHolderError"
+                   class="field-error"></small>
+
+            <div class="card-row">
+
+                <input type="text"
+                       id="expiry"
+                       maxlength="5"
+                       placeholder="MM/YY"
+                       oninput="formatExpiry(this)"
+                       required/>
+
+                <input type="text"
+                       id="cvv"
+                       maxlength="3"
+                       placeholder="CVV"
+                       oninput="this.value=this.value.replace(/\D/g,'')"
+                       required />
+
+            </div>
+
+            <button class="pay-btn">
+                Pay Now
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="checkout-right">
+
+            <h2>Order Summary</h2>
+
+            @{
+                decimal total = 0;
+            }
+
+        @foreach (var item in Model)
+        {
+            decimal itemTotal =
+            item.Product.Price * item.Quantity;
+
+            total += itemTotal;
+
+            <div class="summary-product">
+
+                <img src="@item.Product.ImageUrl" />
+
+                <div>
+
+                    <h3>@item.Product.Name</h3>
+
+                    <p>
+                        Size: @item.Size
+                    </p>
+
+                    <p>
+                        Qty: @item.Quantity
+                    </p>
+
+                </div>
+
+                <span>
+                    Rs. @itemTotal
+                </span>
+
+            </div>
+        }
+
+            <div class="summary-item">
+
+                <span>Subtotal</span>
+
+                <span>Rs. @total</span>
+
+            </div>
+
+            <div class="summary-item">
+
+                <span>Shipping</span>
+
+                <span>FREE</span>
+
+            </div>
+
+            <hr />
+
+            <div class="summary-total">
+
+                <span>Total</span>
+
+                <span>Rs. @total</span>
+
+            </div>
+
+    
+
+</div>
+    <script>
+        
+            function formatCardNumber(input) {
+
+                let value = input.value.replace(/\D/g, '');
+
+            value = value.substring(0, 16);
+
+            value = value.replace(/(.{4})/g, '$1 ').trim();
+
+            input.value = value;
+            }
+
+            function formatExpiry(input) {
+
+                let value = input.value.replace(/\D/g, '');
+
+                if (value.length > 4) {
+                value = value.substring(0, 4);
+                }
+
+                if (value.length >= 3) {
+                value = value.substring(0, 2) + '/' + value.substring(2);
+                }
+
+            input.value = value;
+            }
+        function validateTextField(input, errorId) {
+
+            input.value =
+                input.value.replace(/[^a-zA-Z\s]/g, '');
+
+            const error =
+                document.getElementById(errorId);
+
+            if (input.value.trim() === '') {
+
+                error.innerText =
+                    'Please enter valid text';
+
+            } else {
+
+                error.innerText = '';
+            }
+        }
+        function validatePhone(input) {
+
+            let value = input.value;
+
+            value = value.replace(/\D/g, '');
+
+            if (value.startsWith("92")) {
+                value = value.substring(2);
+            }
+
+            value = value.substring(0, 10);
+
+            let firstPart = value.substring(0, 3);
+
+            let secondPart = value.substring(3);
+
+            input.value = "+92 " + firstPart;
+
+            if (secondPart.length > 0) {
+                input.value += " " + secondPart;
+            }
+
+            const error =
+                document.getElementById("phoneError");
+
+            if (value.length < 10) {
+
+                error.innerText =
+                    'Please enter valid phone number';
+
+            } else {
+
+                error.innerText = '';
+            }
+        }
+
+ 
+
+        document
+            .getElementById("checkoutForm")
+            .addEventListener("submit", function (e) {
+
+                e.preventDefault();
+
+                const form =
+                    document.getElementById("checkoutForm");
+
+              
+
+                if (!form.checkValidity()) {
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Missing Fields',
+                        text: 'Please fill all the fields before continuing.',
+                        confirmButtonColor: '#000',
+                        background: '#fffaf5',
+                        color: '#3d342f'
+                    });
+
+                    form.reportValidity();
+
+                    return;
+                }
+
+
+                Swal.fire({
+                    title: 'Processing Payment...',
+                    text: 'Please wait while we process your order.',
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
+                    background: '#fffaf5',
+                    color: '#3d342f',
+
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                setTimeout(() => {
+
+                   
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Payment Successful!',
+                        text: 'Your order has been confirmed.',
+                        confirmButtonColor: '#000',
+                        background: '#fffaf5',
+                        color: '#3d342f',
+                        confirmButtonText: 'Continue'
+                    }).then(() => {
+
+                        form.submit();
+
+                    });
+
+                }, 2500);
+
+            });
+
+    </script>

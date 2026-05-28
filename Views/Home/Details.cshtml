@@ -1,0 +1,81 @@
+﻿@model Mahe.Models.Product
+
+@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<div class="product-details-page">
+
+    <div class="product-images">
+
+        @foreach (var image in Model.Images)
+        {
+            <img src="@image.ImageUrl" />
+        }
+
+    </div>
+
+    <div class="product-info">
+
+        <h1>@Model.Name</h1>
+
+        <h2>Rs. @Model.Price</h2>
+
+        <p>@Model.Description</p>
+        <form method="post" action="/Cart/Add">
+
+            <input type="hidden"
+                   name="id"
+                   value="@Model.Id" />
+
+            <h3>Select Size</h3>
+
+            <select name="size" required>
+
+                <option value="">
+                    Choose Size
+                </option>
+
+                <option value="Small">
+                    Small
+                </option>
+
+                <option value="Medium">
+                    Medium
+                </option>
+
+                <option value="Large">
+                    Large
+                </option>
+
+            </select>
+
+            <div class="size-chart">
+
+                <h3>Size Chart</h3>
+
+                <p>@Model.SizeChart</p>
+
+            </div>
+
+            @if (Model.Stock > 0)
+            {
+                <button class="btn">
+                    Add To Cart
+                </button>
+            }
+            else
+            {
+                <button class="out-stock-btn"
+                        disabled>
+
+                    Out Of Stock
+
+                </button>
+            }
+
+        </form>
+
+    </div>
+
+</div>

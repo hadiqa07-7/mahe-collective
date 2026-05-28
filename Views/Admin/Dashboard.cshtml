@@ -1,0 +1,136 @@
+@model List<Mahe.Models.Order>
+
+@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <h1>
+        Admin Dashboard
+    </h1>
+    <div class="admin-top-actions">
+
+        <a href="/Admin/Products"
+           class="admin-action-btn">
+
+            Manage Products
+
+        </a>
+
+        <a href="/Admin/CreateProduct"
+           class="admin-action-btn">
+
+            Add Product
+
+        </a>
+
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="empty-orders">
+
+            <h2>
+                No Orders Yet
+            </h2>
+
+            <p>
+                Orders will appear here after customers place them.
+            </p>
+
+        </div>
+    }
+
+    else
+    {
+        @foreach (var order in Model)
+        {
+            <div class="admin-order">
+
+                <div class="admin-order-header">
+
+                    <div>
+
+                        <h2>
+                            Order #@order.Id
+                        </h2>
+
+                        <p>
+                            Date: @order.OrderDate
+                        </p>
+                        <p class="order-status">
+                            Status: @order.Status
+                        </p>
+                        <form method="post"
+                              action="/Admin/UpdateOrderStatus">
+
+                            <input type="hidden"
+                                   name="orderId"
+                                   value="@order.Id" />
+
+                            <select name="status"
+                                    class="status-dropdown">
+
+                                <option>Pending</option>
+                                <option>Processing</option>
+                                <option>Shipped</option>
+                                <option>Delivered</option>
+                                <option>Cancelled</option>
+
+                            </select>
+
+                            <button type="submit"
+                                    class="status-btn">
+
+                                Update Status
+
+                            </button>
+
+                        </form>
+                    </div>
+
+                    <h3>
+                        Rs. @order.TotalAmount
+                    </h3>
+
+                </div>
+
+                <div class="admin-products">
+
+                    @foreach (var item in order.OrderItems)
+                    {
+                        <div class="admin-product">
+
+                            <img src="@item.ProductImage" />
+
+                            <div class="admin-product-info">
+
+                                <h3>
+                                    @item.ProductName
+                                </h3>
+
+                                <p>
+                                    Quantity: @item.Quantity
+                                </p>
+
+                                <p>
+                                    Size: @item.Size
+                                </p>
+
+                                <p>
+                                    Rs. @item.Price
+                                </p>
+
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+        }
+    }
+
+</div>

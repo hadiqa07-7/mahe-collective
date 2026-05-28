@@ -1,0 +1,85 @@
+@model List<Mahe.Models.CartItem>
+
+@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<div class="cart-page">
+
+    <h1>Your Cart</h1>
+
+    @if (Model.Count == 0)
+    {
+        <div class="empty-cart">
+
+    <h2>
+        Your Basket is Empty
+    </h2>
+
+    <a href="/Home/Products"
+       class="empty-cart-btn">
+
+        Continue Shopping
+
+    </a>
+
+    <div class="login-reminder">
+
+        <p>
+            Have an account?
+        </p>
+
+        <a href="/Account/Login"
+           class="login-btn-cart">
+
+            Log in to check out faster
+
+        </a>
+
+    </div>
+
+</div>
+    }
+    else
+    {
+        decimal total = 0;
+
+        @foreach (var item in Model)
+        {
+            decimal itemTotal =
+            item.Product.Price * item.Quantity;
+            total += itemTotal;
+
+            <div class="cart-item">
+
+                <img src="@item.Product.ImageUrl" />
+
+                <div class="cart-details">
+
+                    <h3>@item.Product.Name</h3>
+
+                    <p>Size: @item.Size</p>
+
+                    <p>Quantity: @item.Quantity</p>
+
+                    <p>Rs. @item.Product.Price</p>
+
+                    <h4>Item Total: Rs. @itemTotal</h4>
+
+                </div>
+
+            </div>
+        }
+
+        <div class="cart-summary">
+
+            <h2>Total: Rs. @total.ToString("N0")</h2>
+
+            <a href="/Cart/Checkout" class="checkout-btn">
+                Proceed To Checkout
+            </a>
+
+        </div>
+    }
+
+</div>
