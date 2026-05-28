@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Mahe-Clothingwebsite")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a01f892152f8c69faa78806e499acb7247472b0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a34a00aa78da717b56379e5fab4e83e33c8b430c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Mahe-Clothingwebsite")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Mahe-Clothingwebsite")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

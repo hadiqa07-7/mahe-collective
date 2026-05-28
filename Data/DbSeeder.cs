@@ -14,7 +14,7 @@ namespace Mahe.Data
                     {
                         Name = "Noor",
                         Price = 4500,
-                        ImageUrl = "/images/Noor1.jpeg",
+                        ImageUrl = "/Images/Noor1.jpeg",
                         Description = "Noor reflects soft purity and timeless grace.The delicately embroided neckline adds a subtle yet elegant detail.Light,breathable and effortlessly refined ---made with love by MAHE",
                         SizeChart="S: Chest:20 Length:32 Shoulders:14.5 " +
                         " M: Chest:20 Length:34 Shoulders:15 " +
@@ -23,17 +23,17 @@ namespace Mahe.Data
     {
         new ProductImage
         {
-            ImageUrl = "/images/Noor1.jpeg"
+            ImageUrl = "/Images/Noor1.jpeg"
         },
 
         new ProductImage
         {
-            ImageUrl = "/images/Noor2.jpeg"
+            ImageUrl = "/Images/Noor2.jpeg"
         },
 
         new ProductImage
         {
-            ImageUrl = "/images/Noor3.jpeg"
+            ImageUrl = "/Images/Noor3.jpeg"
         }
     }
                     },
@@ -42,24 +42,24 @@ namespace Mahe.Data
                     {
                         Name = "Saya",
                         Price = 4500,
-                        ImageUrl = "/images/Saya1.jpeg",
+                        ImageUrl = "/Images/Saya1.jpeg",
                         Description = "Saya in black is designed for effortless elegance.The delicately embroided neckline adds a refined touch to its timeless black base.Comfortable,graceful,and versatile---a piece made to carry confidence in every step.ONLY at MAHE",
                         SizeChart="S: Chest:20 Length:32 Shoulders:14.5 | M: Chest:20 Length:34 Shoulders:15 | L: Chest:21 Length:35 Shoulders:15",
                         Images = new List<ProductImage>
     {
         new ProductImage
         {
-            ImageUrl = "/images/Saya1.jpeg"
+            ImageUrl = "/Images/Saya1.jpeg"
         },
 
         new ProductImage
         {
-            ImageUrl = "/images/Saya2.jpeg"
+            ImageUrl = "/Images/Saya2.jpeg"
         },
 
         new ProductImage
         {
-            ImageUrl = "/images/Saya3.jpeg"
+            ImageUrl = "/Images/Saya3.jpeg"
         }
     }
                     }
